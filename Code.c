@@ -25,7 +25,7 @@ float pentagonArea(float side);
 float hexagonArea(float side);
 float heptagonArea(float side);
 float octagonArea(float side);
-float nonagonArea(float side);
+float nanogonArea(float side);
 float decagonArea(float side);
 float trapeziumArea(float base1, float base2, float height);
 double sin_func(double x);
@@ -37,214 +37,215 @@ double polynomial_func_1(double x, int degree, double coefficients[]); // Polyno
 double trapezoidal_rule_1(double (*func)(double, int, double[]), double a, double b, int degree, double coeff[], int n);
 
 int main() {
-    int choice;
-    float radius, side, length, width, base, height, base1, base2;
-    double a, b;
-    int n;
     int expression;
-    int degree1, degree2;
-    double a1, b1;
-    int n1;
-    printf("Enter the number of choice\n");
-    printf("1-For regular shapes\n2-For area enclosed by curves\n3-For area enclosed by polynomials\n");
-    scanf("%d",&expression);
-   if(expression==1){ printf("Choose a shape to calculate its area:\n");
-    printf("1. Circle\n");
-    printf("2. Square\n");
-    printf("3. Rectangle\n");
-    printf("4. Triangle\n");
-    printf("5. Pentagon\n");
-    printf("6. Hexagon\n");
-    printf("7. Heptagon\n");
-    printf("8. Octagon\n");
-    printf("9. Nonagon\n");
-    printf("10. Decagon\n");
-    printf("11. Trapezium\n");
-    printf("Enter the name of the shape :\n");
-    char m[20];
-    scanf("%s",m);
-       if (circle(m)==strlen(m)){
-           printf("Enter the value of Radius : ");
-           scanf("%f",&radius);
-           printf("%0.2f",circleArea(radius));
+    do {
+        printf("\nEnter the number of choice\n");
+        printf("1-For regular shapes\n2-For area enclosed by curves\n3-For area enclosed by polynomials\n4-Exit the program\n");
+        scanf("%d", &expression);
+
+        switch (expression) {
+            case 1: {
+                printf("Choose a shape to calculate its area:\n");
+                printf("1. Circle\n");
+                printf("2. Square\n");
+                printf("3. Rectangle\n");
+                printf("4. Triangle\n");
+                printf("5. Pentagon\n");
+                printf("6. Hexagon\n");
+                printf("7. Heptagon\n");
+                printf("8. Octagon\n");
+                printf("9. Nanogon\n");
+                printf("10. Decagon\n");
+                printf("11. Trapezium\n");
+                printf("Enter the name of the shape :\n");
+                char m[20];
+                scanf("%s", m);
+                if (circle(m) == strlen(m)) {
+                    float radius;
+                    printf("Enter the value of Radius : ");
+                    scanf("%f", &radius);
+                    printf("%0.2f\n", circleArea(radius));
+                } else if (square(m) == strlen(m)) {
+                    float side;
+                    printf("Enter the value of Side : ");
+                    scanf("%f", &side);
+                    printf("%0.2f\n", squareArea(side));
+                } else if (rectangle(m) == strlen(m)) {
+                    float length, width;
+                    printf("Enter the length and width of the rectangle: ");
+                    scanf("%f %f", &length, &width);
+                    printf("Area of the rectangle: %.2f\n", rectangleArea(length, width));
+                } else if (triangle(m) == strlen(m)) {
+                    float base, height;
+                    printf("Enter the base and height of the triangle: ");
+                    scanf("%f %f", &base, &height);
+                    printf("Area of the triangle: %.2f\n", triangleArea(base, height));
+                } else if (pentagon(m) == strlen(m)) {
+                    float side;
+                    printf("Enter the side of the pentagon: ");
+                    scanf("%f", &side);
+                    printf("Area of the pentagon: %.2f\n", pentagonArea(side));
+                } else if (hexagon(m) == strlen(m)) {
+                    float side;
+                    printf("Enter the side of the hexagon: ");
+                    scanf("%f", &side);
+                    printf("Area of the hexagon: %.2f\n", hexagonArea(side));
+                } else if (heptagon(m) == strlen(m)) {
+                    float side;
+                    printf("Enter the side of the heptagon: ");
+                    scanf("%f", &side);
+                    printf("Area of the heptagon: %.2f\n", heptagonArea(side));
+                } else if (octagon(m) == strlen(m)) {
+                    float side;
+                    printf("Enter the side of the octagon: ");
+                    scanf("%f", &side);
+                    printf("Area of the octagon: %.2f\n", octagonArea(side));
+                } else if (nanogon(m) == strlen(m)) {
+                    float side;
+                    printf("Enter the side of the nanogon: ");
+                    scanf("%f", &side);
+                    printf("Area of the nonagon: %.2f\n", nanogonArea(side));
+                } else if (decagon(m) == strlen(m)) {
+                    float side;
+                    printf("Enter the side of the decagon: ");
+                    scanf("%f", &side);
+                    printf("Area of the decagon: %.2f\n", decagonArea(side));
+                } else if (trapezium(m) == strlen(m)) {
+                    float base1, base2, height;
+                    printf("Enter the lengths of the two bases and the height of the trapezium: ");
+                    scanf("%f %f %f", &base1, &base2, &height);
+                    printf("Area of the trapezium: %.2f\n", trapeziumArea(base1, base2, height));
+                } else {
+                    printf("Invalid choice\n");
+                }
+                break;
+            }
+            case 2: {
+                printf("Choose two functions to calculate the area between them:\n");
+                printf("1. sin(x)\n");
+                printf("2. cos(x)\n");
+                printf("3. tan(x)\n");
+                printf("4. exp(x)\n");
+                printf("Enter your choice for the first function (1-4): ");
+                int choice;
+                scanf("%d", &choice);
+
+                double (*func1)(double);
+                switch (choice) {
+                    case 1:
+                        func1 = sin_func;
+                        break;
+                    case 2:
+                        func1 = cos_func;
+                        break;
+                    case 3:
+                        func1 = tan_func;
+                        break;
+                    case 4:
+                        func1 = exp_func;
+                        break;
+                    default:
+                        printf("Invalid choice.\n");
+                        continue; // Go back to the beginning of the loop
+                }
+
+                printf("Enter your choice for the second function (1-4): ");
+                scanf("%d", &choice);
+
+                double (*func2)(double);
+                switch (choice) {
+                    case 1:
+                        func2 = sin_func;
+                        break;
+                    case 2:
+                        func2 = cos_func;
+                        break;
+                    case 3:
+                        func2 = tan_func;
+                        break;
+                    case 4:
+                        func2 = exp_func;
+                        break;
+                    default:
+                        printf("Invalid choice.\n");
+                        continue; // Go back to the beginning of the loop
+                }
+
+                double a, b;
+                int n;
+                printf("Enter the lower bound of integration: ");
+                scanf("%lf", &a);
+                printf("Enter the upper bound of integration: ");
+                scanf("%lf", &b);
+                printf("Enter the number of subintervals: ");
+                scanf("%d", &n);
+
+                // Calculate the area between the curves using the trapezoidal rule
+                double h = (b - a) / n;
+                double area = 0.0;
+                double x1 = a;
+                double x2, y1;
+
+                for (int i = 0; i < n; i++) {
+                    x2 = x1 + h;
+                    y1 = func1(x1) - func2(x1);
+
+                    if (y1 < 0) {
+                        double c = (x1 + x2) / 2;
+                        double area_interval = fabs(trapezoidal_rule(func1, x1, c, n) - trapezoidal_rule(func2, x1, c, n))
+                                              + fabs(trapezoidal_rule(func1, c, x2, n) - trapezoidal_rule(func2, c, x2, n));
+                        area += area_interval;
+                    } else {
+                        area += 0.5 * (func1(x1) + func1(x2)) * h - 0.5 * (func2(x1) + func2(x2)) * h;
+                    }
+
+                    x1 = x2;
+                }
+
+                printf("Area between the curves: %.6lf\n", area);
+                break;
+            }
+            case 3: {
+                printf("Enter the degree of the first polynomial: ");
+                int degree1;
+                scanf("%d", &degree1);
+                printf("Enter the degree of the second polynomial: ");
+                int degree2;
+                scanf("%d", &degree2);
+
+                double a1, b1;
+                int n1;
+                printf("Enter the lower bound of integration: ");
+                scanf("%lf", &a1);
+                printf("Enter the upper bound of integration: ");
+                scanf("%lf", &b1);
+                printf("Enter the number of subintervals: ");
+                scanf("%d", &n1);
+
+                double coeff1[degree1 + 1], coeff2[degree2 + 1];
+                printf("Enter the coefficients for the first polynomial (separated by spaces, starting from x^0 to x^degree1): ");
+                for (int i = 0; i <= degree1; i++)
+                    scanf("%lf", &coeff1[i]);
+
+                printf("Enter the coefficients for the second polynomial (separated by spaces, starting from x^0 to x^degree2): ");
+                for (int i = 0; i <= degree2; i++)
+                    scanf("%lf", &coeff2[i]);
+
+                // Calculate the area between the curves using the trapezoidal rule
+                double area1 = fabs(trapezoidal_rule_1(polynomial_func_1, a1, b1, degree1, coeff1, n1) - trapezoidal_rule_1(polynomial_func_1, a1, b1, degree2, coeff2, n1));
+
+                printf("Area between the curves: %.6lf\n", area1);
+                break;
+            }
+            case 4:
+                printf("Exiting the program.\n");
+                break;
+            default:
+                printf("Invalid choice\n");
         }
-        else if(square(m)==strlen(m)){
-            printf("Enter the value of Side : ");
-            scanf("%f",&side);
-            printf("%0.2f",squareArea(side));
-        }
-        else if(rectangle(m)==strlen(m)){
-            printf("Enter the length and width of the rectangle: ");
-            scanf("%f %f", &length, &width);
-            printf("Area of the rectangle: %.2f\n", rectangleArea(length, width));
-        }
-        else if(triangle(m)==strlen(m)){
-            printf("Enter the base and height of the triangle: ");
-            scanf("%f %f", &base, &height);
-            printf("Area of the triangle: %.2f\n", triangleArea(base, height));
-        }
-        else if(pentagon(m)==strlen(m)){
-            printf("Enter the side of the pentagon: ");
-            scanf("%f", &side);
-            printf("Area of the pentagon: %.2f\n", pentagonArea(side));
-        }
-        else if(hexagon(m)==strlen(m)){
-            printf("Enter the side of the hexagon: ");
-            scanf("%f", &side);
-            printf("Area of the hexagon: %.2f\n", hexagonArea(side));
-        }
-        else if(heptagon(m)==strlen(m)){
-             printf("Enter the side of the heptagon: ");
-            scanf("%f", &side);
-            printf("Area of the heptagon: %.2f\n", heptagonArea(side));
-        }
-        else if(octagon(m)==strlen(m)){
-            printf("Enter the side of the octagon: ");
-            scanf("%f", &side);
-            printf("Area of the octagon: %.2f\n", octagonArea(side));
-        }
-        else if(nanogon(m)==strlen(m)){
-            printf("Enter the side of the nonagon: ");
-            scanf("%f", &side);
-            printf("Area of the nonagon: %.2f\n", nonagonArea(side));
-        }
-        else if(decagon(m)==strlen(m)){
-            printf("Enter the side of the decagon: ");
-            scanf("%f", &side);
-            printf("Area of the decagon: %.2f\n", decagonArea(side));
-        }
-        else if(trapezium(m)==strlen(m)){
-            printf("Enter the lengths of the two bases and the height of the trapezium: ");
-            scanf("%f %f %f", &base1, &base2, &height);
-            printf("Area of the trapezium: %.2f\n", trapeziumArea(base1, base2, height));
-        }
-        else{
-            printf("Invalid choice\n");
-            
-        }
-        
+    } while (expression != 4);
+
     return 0;
-}
-
-    if(expression==2){
-            printf("Choose two functions to calculate the area between them:\n");
-    printf("1. sin(x)\n");
-    printf("2. cos(x)\n");
-    printf("3. tan(x)\n");
-    printf("4. exp(x)\n");
-    printf("Enter your choice for the first function (1-4): ");
-    scanf("%d", &choice);
-
-    double (*func1)(double);
-    switch (choice) {
-        case 1:
-            func1 = sin_func;
-            break;
-        case 2:
-            func1 = cos_func;
-            break;
-        case 3:
-            func1 = tan_func;
-            break;
-        case 4:
-            func1 = exp_func;
-            break;
-        default:
-            printf("Invalid choice.\n");
-            return 1;
-    }
-
-    printf("Enter your choice for the second function (1-4): ");
-    scanf("%d", &choice);
-
-    double (*func2)(double);
-    switch (choice) {
-        case 1:
-            func2 = sin_func;
-            break;
-        case 2:
-            func2 = cos_func;
-            break;
-        case 3:
-            func2 = tan_func;
-            break;
-        case 4:
-            func2 = exp_func;
-            break;
-        default:
-            printf("Invalid choice.\n");
-            return 1;
-    }
-
-    printf("Enter the lower bound of integration: ");
-    scanf("%lf", &a);
-    printf("Enter the upper bound of integration: ");
-    scanf("%lf", &b);
-    printf("Enter the number of subintervals: ");
-    scanf("%d", &n);
-
-    // Calculate the area between the curves using the trapezoidal rule
-    double h = (b - a) / n;
-    double area = 0.0;
-    double x1 = a;
-    double x2, y1;
-
-    for (int i = 0; i < n; i++) {
-        x2 = x1 + h;
-        y1 = func1(x1) - func2(x1);
-        
-
-        
-        if (y1 < 0) {
-            
-            double c = (x1 + x2) / 2; //fabs is a function used to make the absolute floating point
-            double area_interval = fabs(trapezoidal_rule(func1, x1, c, n) - trapezoidal_rule(func2, x1, c, n))
-                                  + fabs(trapezoidal_rule(func1, c, x2, n) - trapezoidal_rule(func2, c, x2, n));
-            area += area_interval;
-        } else {
-
-            area += 0.5 * (func1(x1) + func1(x2)) * h - 0.5 * (func2(x1) + func2(x2)) * h;
-        }
-
-        x1 = x2;
-    }
-
-    printf("Area between the curves: %.6lf\n", area);
-
-    return 0;
-  }
-
-  if(expression==3){
-      printf("Enter the degree of the first polynomial: ");
-    scanf("%d", &degree1);
-    printf("Enter the degree of the second polynomial: ");
-    scanf("%d", &degree2);
-
-    printf("Enter the lower bound of integration: ");
-    scanf("%lf", &a1);
-    printf("Enter the upper bound of integration: ");
-    scanf("%lf", &b1);
-    printf("Enter the number of subintervals: ");
-    scanf("%d", &n1);
-    double coeff1[degree1 + 1], coeff2[degree2 + 1];
-    printf("Enter the coefficients for the first polynomial (separated by spaces, starting from x^0 to x^degree1): ");
-    for (int i = 0; i <= degree1; i++)
-        scanf("%lf", &coeff1[i]);
-
-    printf("Enter the coefficients for the second polynomial (separated by spaces, starting from x^0 to x^degree2): ");
-    for (int i = 0; i <= degree2; i++)
-        scanf("%lf", &coeff2[i]);
-
-    // Calculate the area between the curves using the trapezoidal rule
-    double area1 = fabs(trapezoidal_rule_1(polynomial_func_1, a1, b1, degree1, coeff1, n1) - trapezoidal_rule_1(polynomial_func_1, a1, b1, degree2, coeff2, n1));
-
-    printf("Area between the curves: %.6lf\n", area1);
-
-    return 0;
-
-
-  }
-
 }
 
 
@@ -281,7 +282,7 @@ float octagonArea(float side) {
     return 2 * (1 + sqrt(2)) * side * side;
 }
 
-float nonagonArea(float side) {
+float nanogonArea(float side) {
     return 0.25 * (9 * tan(M_PI / 9)) * side * side;
 }
 
